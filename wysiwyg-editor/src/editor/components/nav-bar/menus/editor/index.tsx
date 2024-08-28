@@ -3,16 +3,12 @@ import IconButton from "@mui/material/IconButton/IconButton";
 import { useCallback, useState } from "react";
 import Popover from "@mui/material/Popover";
 import Tooltip from "@mui/material/Tooltip/Tooltip";
-import { getDevices } from "@/editor/state/editor/selectors/get-devices";
-import { useEditorStore } from "@/editor/state/editor";
-import { ResetList } from "./reset-list";
-import { DevicesGroupList } from "./devices-group-list";
+import { ResetList } from "@/editor/components/nav-bar/menus/editor/reset-list";
+import { DevicesTypes } from "@/editor/components/nav-bar/menus/editor/devices-types";
 import { Orientation } from "@/editor/components/nav-bar/menus/editor/orientation";
 
 const EditorMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const devices = useEditorStore(getDevices);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -26,7 +22,7 @@ const EditorMenu: React.FC = () => {
         <IconButton
           size="large"
           aria-label="account of current user"
-          aria-controls="menu-appbar"
+          aria-controls="devices-filter"
           aria-haspopup="true"
           onClick={handleMenu}
           color="inherit"
@@ -35,7 +31,7 @@ const EditorMenu: React.FC = () => {
         </IconButton>
       </Tooltip>
       <Popover
-        id="menu-appbar"
+        id="devices-filter"
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "top",
@@ -50,9 +46,7 @@ const EditorMenu: React.FC = () => {
         onClose={resetAnchor}
       >
         <ResetList resetAnchor={resetAnchor} />
-        {devices.map((deviceGroup) => (
-          <DevicesGroupList {...deviceGroup} resetAnchor={resetAnchor} />
-        ))}
+        <DevicesTypes resetAnchor={resetAnchor} />
       </Popover>
       <Orientation />
     </>

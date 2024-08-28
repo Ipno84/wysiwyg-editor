@@ -2,11 +2,11 @@ import { createSelector } from "reselect";
 
 import { getSelectedDevice } from "@/editor/state/editor/selectors/get-selected-device";
 
-const getSelectedDeviceSize = createSelector(
+const getSelectedDeviceViewport = createSelector(
   [getSelectedDevice],
   (selectedDevice) => {
-    return selectedDevice?.size;
+    return selectedDevice?.viewport;
   },
 );
 
-export { getSelectedDeviceSize };
+export { getSelectedDeviceViewport };

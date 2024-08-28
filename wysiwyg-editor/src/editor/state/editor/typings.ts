@@ -3,13 +3,33 @@ import { AuthorableProps } from "react";
 interface Device {
   id: string;
   label: string;
-  size: [number, number];
+  brand: string;
+  year: number;
+  type: "mobile" | "tablet" | "laptop" | "desktop" | "monitor" | "tv" | "watch";
+  viewport: [number, number];
+  resolutions: [number, number];
 }
 
-interface DeviceGroup {
+interface Project {
   id: string;
   name: string;
-  items: Device[];
+}
+
+interface Schema {
+  id: string;
+  name: string;
+}
+
+interface Component {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface Method {
+  id: string;
+  name: string;
+  description: string;
 }
 
 interface IEditorState {
@@ -21,9 +41,13 @@ interface IEditorState {
   optionsBarVisible: boolean;
   selectedAuthorableKey: string;
   selectedAuthorableComponentName: string;
-  devices: DeviceGroup[];
+  devices: Device[];
   selectedDeviceId: string | null;
   landscapeOrientation: boolean;
+  projects: Project[];
+  schemas: Schema[];
+  components: Component[];
+  methods: Method[];
   toggleCommandsBarOpening: () => void;
   setAuthorableProps: (key: string, authorableProps?: AuthorableProps) => void;
   setSelectedAuthorableKey: (
@@ -37,6 +61,11 @@ interface IEditorState {
   setSelectedAuthorableStateFilter: (stateFilterValue: string) => void;
   setSelectedDeviceId: (selectedDeviceId: string | null) => void;
   toggleLandscapeOrientation: () => void;
+  removeDevices: (deviceIds: string[]) => void;
+  removeProjects: (projectIds: string[]) => void;
+  removeSchemas: (schemaIds: string[]) => void;
+  removeComponents: (componentIds: string[]) => void;
+  removeMethods: (methodIds: string[]) => void;
 }
 
-export type { IEditorState, Device, DeviceGroup };
+export type { IEditorState, Device, Project, Schema, Component, Method };

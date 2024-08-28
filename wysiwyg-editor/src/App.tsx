@@ -10,7 +10,7 @@ const App: React.FC = () => {
   return (
     <>
       <Global />
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex", overflow: "hidden" }}>
         <CssBaseline />
         <CommandsBar />
         <Box component="main" sx={{ flex: 1 }}>

@@ -9,9 +9,12 @@ import type { CommandLink } from "@/editor/state/navigation/typings";
 import { router } from "@/editor/navigation/router";
 import { useEditorStore } from "@/editor/state/editor";
 import { isCommandsBarOpen as isCommandsBarOpenSelector } from "@/editor/state/editor/selectors/is-commands-bar-open";
+import { useCallback } from "react";
 
 const CommandLink: React.FC<CommandLink> = ({ label, Icon, to }) => {
   const isCommandBarOpen = useEditorStore(isCommandsBarOpenSelector);
+
+  const onClick = useCallback(() => router.navigate(to), [to]);
 
   return (
     <ListItem key={label} disablePadding sx={{ display: "block" }}>
@@ -30,7 +33,7 @@ const CommandLink: React.FC<CommandLink> = ({ label, Icon, to }) => {
             justifyContent: isCommandBarOpen ? "initial" : "center",
             px: 2.5,
           }}
-          onClick={() => router.navigate(to)}
+          onClick={onClick}
         >
           <ListItemIcon
             sx={{

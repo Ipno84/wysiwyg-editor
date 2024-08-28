@@ -1,5 +1,5 @@
 import { useEditorStore } from "@/editor/state/editor";
-import { getSelectedDeviceSize } from "@/editor/state/editor/selectors/get-selected-device-size";
+import { getSelectedDeviceViewport } from "@/editor/state/editor/selectors/get-selected-device-viewport";
 import { isLandscapeOrientation } from "@/editor/state/editor/selectors/is-landscape-orientation";
 import { Theme } from "@mui/material";
 import Box from "@mui/material/Box/Box";
@@ -7,16 +7,16 @@ import { BoxOwnProps } from "@mui/system";
 import React, { PropsWithChildren, useMemo } from "react";
 
 const ContentWrapper: React.FC<PropsWithChildren> = ({ children }) => {
-  const selectedSize = useEditorStore(getSelectedDeviceSize);
+  const selectedViewport = useEditorStore(getSelectedDeviceViewport);
   const isLandscape = useEditorStore(isLandscapeOrientation);
 
   const width = useMemo(
-    () => selectedSize?.[isLandscape ? 1 : 0] ?? "100%",
-    [selectedSize, isLandscape],
+    () => selectedViewport?.[isLandscape ? 1 : 0] ?? "100%",
+    [selectedViewport, isLandscape],
   );
   const height = useMemo(
-    () => selectedSize?.[isLandscape ? 0 : 1] ?? "100%",
-    [selectedSize, isLandscape],
+    () => selectedViewport?.[isLandscape ? 0 : 1] ?? "100%",
+    [selectedViewport, isLandscape],
   );
 
   const sxProps = useMemo<BoxOwnProps<Theme>["sx"]>(() => {
@@ -25,7 +25,7 @@ const ContentWrapper: React.FC<PropsWithChildren> = ({ children }) => {
       height,
       transition: "width .15s ease, height .15s ease",
     };
-    if (selectedSize) {
+    if (selectedViewport) {
       style = {
         ...style,
         outlineWidth: 8,
@@ -38,7 +38,7 @@ const ContentWrapper: React.FC<PropsWithChildren> = ({ children }) => {
     }
 
     return style;
-  }, [height, selectedSize, width]);
+  }, [height, selectedViewport, width]);
 
   return <Box sx={sxProps}>{children}</Box>;
 };

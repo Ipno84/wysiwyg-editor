@@ -20,6 +20,7 @@ const useTreeStore = create<ITreeState>((set) => ({
     }));
   },
   updateLeaf: (treeName, leafPath, leaf) => {
+    // TODO: update single leaf or whole tree when user clicks save
     console.log(treeName, leafPath, leaf);
   },
   setOrUpdateAvailableComponents: (

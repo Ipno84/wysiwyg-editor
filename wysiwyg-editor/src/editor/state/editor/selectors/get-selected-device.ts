@@ -6,10 +6,7 @@ import { getSelectedDeviceId } from "@/editor/state/editor/selectors/get-selecte
 const getSelectedDevice = createSelector(
   [getDevices, getSelectedDeviceId],
   (devices, selectedDeviceId) => {
-    return devices
-      .map((deviceGroup) => deviceGroup.items)
-      .flat()
-      .find((device) => device.id === selectedDeviceId);
+    return devices.find((device) => device.id === selectedDeviceId);
   },
 );
 

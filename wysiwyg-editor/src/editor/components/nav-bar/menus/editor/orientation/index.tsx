@@ -5,6 +5,7 @@ import Tooltip from "@mui/material/Tooltip/Tooltip";
 import { useEditorStore } from "@/editor/state/editor";
 import { toggleLandscapeOrientation as toggleLandscapeOrientationAction } from "@/editor/state/editor/actions/toggle-orientation";
 import { isLandscapeOrientation } from "@/editor/state/editor/selectors/is-landscape-orientation";
+import { hasSelectedDevice } from "@/editor/state/editor/selectors/has-selected-device-id";
 
 const Orientation: React.FC = () => {
   const toggleLandscapeOrientation = useEditorStore(
@@ -12,6 +13,8 @@ const Orientation: React.FC = () => {
   );
 
   const isLandscape = useEditorStore(isLandscapeOrientation);
+
+  const enabled = useEditorStore(hasSelectedDevice);
 
   const rotationDegrees = useMemo(
     () => (isLandscape ? 135 : 46),
@@ -27,6 +30,7 @@ const Orientation: React.FC = () => {
         aria-haspopup="true"
         onClick={toggleLandscapeOrientation}
         color="inherit"
+        disabled={!enabled}
       >
         <ScreenRotationIcon
           sx={{

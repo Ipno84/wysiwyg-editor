@@ -9,10 +9,13 @@ import { getSelectedDeviceId } from "@/editor/state/editor/selectors/get-selecte
 import { setSelectedDeviceId as setSelectedDeviceIdAction } from "@/editor/state/editor/actions/set-selected-device-id";
 import { ListItemIcon } from "@/editor/components/nav-bar/menus/editor/list-item-icon";
 import type { ResetListProps } from "@/editor/components/nav-bar/menus/editor/reset-list/typings";
+import { getSelectedDevice } from "@/editor/state/editor/selectors/get-selected-device";
+import { DeviceItem } from "../device-item";
 
 const ResetList: React.FC<ResetListProps> = ({ resetAnchor }) => {
   const selectedDeviceId = useEditorStore(getSelectedDeviceId);
   const setSelectedDeviceId = useEditorStore(setSelectedDeviceIdAction);
+  const selectedDevice = useEditorStore(getSelectedDevice);
 
   const resetSelectedDeviceId = useCallback(() => {
     setSelectedDeviceId(null);
@@ -29,6 +32,9 @@ const ResetList: React.FC<ResetListProps> = ({ resetAnchor }) => {
           <ListItemText>Fit Available space (100%)</ListItemText>
         </ListItemButton>
       </ListItem>
+      {selectedDevice ? (
+        <DeviceItem {...selectedDevice} resetAnchor={resetAnchor} />
+      ) : null}
     </List>
   );
 };

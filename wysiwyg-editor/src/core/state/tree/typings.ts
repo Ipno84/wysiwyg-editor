@@ -1,6 +1,5 @@
+import type { Tree, Leaf } from "@/core/components/renderer/typings";
 import type { PropsWithChildren } from "react";
-
-import type { Leaf, Tree } from "@/components/core/renderer/typings";
 
 interface ITreeState {
   availableTrees: Record<string, Tree>;

@@ -8,8 +8,17 @@ import { getSelectedDeviceId } from "@/editor/state/editor/selectors/get-selecte
 import { setSelectedDeviceId as setSelectedDeviceIdAction } from "@/editor/state/editor/actions/set-selected-device-id";
 import { ListItemIcon } from "@/editor/components/nav-bar/menus/editor/list-item-icon";
 import type { DeviceItemProps } from "@/editor/components/nav-bar/menus/editor/device-item/typings";
+import Box from "@mui/material/Box/Box";
+import Typography from "@mui/material/Typography/Typography";
 
-const DeviceItem: React.FC<DeviceItemProps> = ({ resetAnchor, id, label }) => {
+const DeviceItem: React.FC<DeviceItemProps> = ({
+  resetAnchor,
+  id,
+  label,
+  viewport,
+  resolutions,
+  brand,
+}) => {
   const selectedDeviceId = useEditorStore(getSelectedDeviceId);
   const setSelectedDeviceId = useEditorStore(setSelectedDeviceIdAction);
 
@@ -19,12 +28,30 @@ const DeviceItem: React.FC<DeviceItemProps> = ({ resetAnchor, id, label }) => {
   }, [id, resetAnchor, setSelectedDeviceId]);
 
   return (
-    <ListItem onClick={onSelect} disablePadding>
+    <ListItem
+      onClick={onSelect}
+      disablePadding
+      selected={selectedDeviceId === id}
+    >
       <ListItemButton>
         <ListItemIcon>
           {selectedDeviceId === id ? <Check /> : null}
         </ListItemIcon>
-        <ListItemText>{label}</ListItemText>
+        <ListItemText
+          primary={label}
+          primaryTypographyProps={{ fontWeight: 700 }}
+          secondary={
+            <Box>
+              <Typography variant="body2">Brand: {brand}</Typography>
+              <Typography variant="body2">
+                Viewport: {viewport.join("x")}
+              </Typography>
+              <Typography variant="body2">
+                Resolution: {resolutions.join("x")}
+              </Typography>
+            </Box>
+          }
+        />
       </ListItemButton>
     </ListItem>
   );
