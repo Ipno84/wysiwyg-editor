@@ -4,9 +4,9 @@ import { useParams } from 'react-router-dom';
 
 import { Content } from '@/editor/components/content';
 import { Main } from '@/editor/components/main';
-import { OptionsBar } from '@/editor/components/options-bar';
 import { Sidebar } from '@/editor/components/sidebar';
 import { TreeFold } from '@/editor/components/tree-fold';
+import { WidgetsBar } from '@/editor/components/widgets-bar';
 import { useTitle } from '@/editor/hooks/use-title';
 import { RouteParams } from '@/editor/navigation/typings';
 import { useEditorStore } from '@/editor/state/editor';
@@ -25,8 +25,8 @@ const Schema: React.FC = () => {
             <Main>
                 <Content />
             </Main>
-            <Sidebar>
-                <OptionsBar />
+            <Sidebar width={400}>
+                <WidgetsBar />
             </Sidebar>
         </Grid>
     );

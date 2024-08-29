@@ -58,9 +58,10 @@ interface IEditorState {
     selectedAuthorableStateFilter: Record<string, string>;
     commandsBarOpen: boolean;
     treeBarVisible: boolean;
-    optionsBarVisible: boolean;
+    widgetsBarVisible: boolean;
     selectedAuthorableKey: string;
     selectedAuthorableComponentName: string;
+    optionsWidgetAsDialog: boolean;
     devices: Device[];
     selectedDeviceId: string | null;
     landscapeOrientation: boolean;
@@ -78,6 +79,11 @@ interface IEditorState {
     setSelectedAuthorableStateFilter: (stateFilterValue: string) => void;
     setSelectedDeviceId: (selectedDeviceId: string | null) => void;
     toggleLandscapeOrientation: () => void;
+    setCommandsBarOpening: (commandsBarOpen: boolean) => void;
+    setTreeBarVisibility: (treeBarVisible: boolean) => void;
+    setWidgetsBarVisibility: (widgetsBarVisible: boolean) => void;
+    setOptionsWidgetAsDialog: (optionsWidgetAsDialog: boolean) => void;
+    toogleOptionsWidgetAsDialog: () => void;
     removeDevices: (deviceIds: string[]) => void;
     removeProjects: (projectIds: string[]) => void;
     removeSchemas: (schemaIds: string[]) => void;

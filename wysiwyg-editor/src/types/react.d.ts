@@ -12,6 +12,7 @@ declare module 'react' {
         default?: any;
         required?: boolean;
         label?: string;
+        description?: string;
         group?: Group;
         multiple?: boolean;
         options?: Group[];

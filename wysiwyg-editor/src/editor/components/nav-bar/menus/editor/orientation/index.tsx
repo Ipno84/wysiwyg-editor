@@ -4,7 +4,7 @@ import Tooltip from '@mui/material/Tooltip/Tooltip';
 import { useMemo } from 'react';
 
 import { useEditorStore } from '@/editor/state/editor';
-import { toggleLandscapeOrientation as toggleLandscapeOrientationAction } from '@/editor/state/editor/actions/toggle-orientation';
+import { toggleLandscapeOrientation as toggleLandscapeOrientationAction } from '@/editor/state/editor/actions/toggle-landscape-orientation';
 import { hasSelectedDevice } from '@/editor/state/editor/selectors/devices/has-selected-device-id';
 import { isLandscapeOrientation } from '@/editor/state/editor/selectors/devices/is-landscape-orientation';
 

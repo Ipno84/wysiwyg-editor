@@ -1,15 +1,17 @@
-import Box from "@mui/material/Box/Box";
-import Grid from "@mui/material/Grid/Grid";
-import React, { PropsWithChildren } from "react";
+import Box from '@mui/material/Box/Box';
+import Grid from '@mui/material/Grid/Grid';
+import React from 'react';
 
-const Sidebar: React.FC<PropsWithChildren> = ({ children }) => {
-  return (
-    <Grid item sx={{ height: "100%", width: 300 }}>
-      <Box bgcolor={"#f3f3f3"} p={2} sx={{ height: "100%", overflow: "auto" }}>
-        {children}
-      </Box>
-    </Grid>
-  );
+import type { SidebarProps } from '@/editor/components/sidebar/typings';
+
+const Sidebar: React.FC<SidebarProps> = ({ children, width = 300 }) => {
+    return (
+        <Grid item sx={{ height: '100%', width }}>
+            <Box bgcolor={'#f3f3f3'} p={2} sx={{ height: '100%', overflow: 'auto' }}>
+                {children}
+            </Box>
+        </Grid>
+    );
 };
 
 export { Sidebar };
