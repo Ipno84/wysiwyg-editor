@@ -1,6 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { Segments } from '@/editor/navigation/enum';
+import { paths } from '@/editor/navigation/paths';
+import { AbTests } from '@/editor/navigation/routes/ab-tests';
+import { AbTest } from '@/editor/navigation/routes/ab-tests/ab-test';
 import { Account } from '@/editor/navigation/routes/account';
 import { CreateAccount } from '@/editor/navigation/routes/account/create';
 import { ForgotPassword } from '@/editor/navigation/routes/account/forgot';
@@ -11,77 +13,100 @@ import { Dashboard } from '@/editor/navigation/routes/dashboard';
 import { Devices } from '@/editor/navigation/routes/devices';
 import { Methods } from '@/editor/navigation/routes/methods';
 import { Method } from '@/editor/navigation/routes/methods/method';
+import { Personalizations } from '@/editor/navigation/routes/personalizations';
+import { Personalization } from '@/editor/navigation/routes/personalizations/personalization';
 import { Projects } from '@/editor/navigation/routes/projects';
 import { Project } from '@/editor/navigation/routes/projects/project';
 import { Schemas } from '@/editor/navigation/routes/schemas';
 import { Schema } from '@/editor/navigation/routes/schemas/schema';
 import { Settings } from '@/editor/navigation/routes/settings';
-import { Team } from '@/editor/navigation/routes/team';
+import { Teams } from '@/editor/navigation/routes/teams';
+import { Team } from '@/editor/navigation/routes/teams/team';
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: paths.dashboard,
         Component: Dashboard,
     },
     {
-        path: `/${Segments.SETTINGS}`,
+        path: paths.settings,
         Component: Settings,
     },
     {
-        path: `/${Segments.TEAM}`,
-        Component: Team,
-    },
-    {
-        path: `/${Segments.DEVICES}`,
+        path: paths.devices,
         Component: Devices,
     },
     {
-        path: `/${Segments.ACCOUNT}/:accountId`,
+        path: paths.account,
         Component: Account,
     },
     {
-        path: `/${Segments.ACCOUNT}/${Segments.CREATE}`,
+        path: paths.accountCreate,
         Component: CreateAccount,
     },
     {
-        path: `/${Segments.ACCOUNT}/${Segments.FORGOT}`,
+        path: paths.accountForgot,
         Component: ForgotPassword,
     },
     {
-        path: `/${Segments.ACCOUNT}/${Segments.LOGIN}`,
+        path: paths.accountLogin,
         Component: AccountLogin,
     },
     {
-        path: `/${Segments.PROJECTS}`,
+        path: paths.projects,
         Component: Projects,
     },
     {
-        path: `/${Segments.PROJECTS}/:projectId`,
+        path: paths.project,
         Component: Project,
     },
     {
-        path: `/${Segments.SCHEMAS}`,
+        path: paths.schemas,
         Component: Schemas,
     },
     {
-        path: `/${Segments.SCHEMAS}/:schemaId`,
+        path: paths.schema,
         Component: Schema,
     },
     {
-        path: `/${Segments.COMPONENTS}`,
+        path: paths.components,
         Component: Components,
     },
     {
-        path: `/${Segments.COMPONENTS}/:componentId`,
+        path: paths.component,
         Component: Component,
     },
     {
-        path: `/${Segments.METHODS}`,
+        path: paths.methods,
         Component: Methods,
     },
     {
-        path: `/${Segments.METHODS}/:componentId`,
+        path: paths.method,
         Component: Method,
+    },
+    {
+        path: paths.abTests,
+        Component: AbTests,
+    },
+    {
+        path: paths.abTest,
+        Component: AbTest,
+    },
+    {
+        path: paths.personalizations,
+        Component: Personalizations,
+    },
+    {
+        path: paths.personalization,
+        Component: Personalization,
+    },
+    {
+        path: paths.teams,
+        Component: Teams,
+    },
+    {
+        path: paths.team,
+        Component: Team,
     },
 ]);
 

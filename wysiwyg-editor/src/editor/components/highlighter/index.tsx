@@ -1,74 +1,70 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 
-import { Highlighter as Styled } from "@/editor/components/highlighter/styled";
-import type { HighlighterProps } from "@/editor/components/highlighter/typings";
-import { useEditorStore } from "@/editor/state/editor";
-import { getAuthorableState } from "@/editor/state/editor/selectors/get-authorable-state";
-import { getSelectedAuthorableKey } from "@/editor/state/editor/selectors/get-selected-authorable-key";
+import type { HighlighterProps } from '@/editor/components/highlighter/typings';
 
-const Highlighter: React.FC<HighlighterProps> = ({
-  wrapperComponentRef,
-  selected,
-  componentName,
-  onClick,
-}) => {
-  const selectedAuthorableKey = useEditorStore(getSelectedAuthorableKey);
-  const authorableState = useEditorStore(getAuthorableState);
+import { Highlighter as Styled } from '@/editor/components/highlighter/styled';
+import { useEditorStore } from '@/editor/state/editor';
+import { getAuthorableState } from '@/editor/state/editor/selectors/authorables/get-authorable-state';
+import { getSelectedAuthorableKey } from '@/editor/state/editor/selectors/authorables/get-selected-authorable-key';
 
-  const [domRect, setDomRect] = useState<DOMRect>(new DOMRect());
+const Highlighter: React.FC<HighlighterProps> = ({ wrapperComponentRef, selected, componentName, onClick }) => {
+    const selectedAuthorableKey = useEditorStore(getSelectedAuthorableKey);
+    const authorableState = useEditorStore(getAuthorableState);
 
-  useEffect(() => {
-    if (wrapperComponentRef?.current) {
-      const rect = wrapperComponentRef.current?.getBoundingClientRect();
-      if (rect) setDomRect(rect);
-    }
-  }, [selectedAuthorableKey, wrapperComponentRef]);
+    const [domRect, setDomRect] = useState<DOMRect>(new DOMRect());
 
-  useEffect(() => {
-    if (wrapperComponentRef?.current) {
-      const rect = wrapperComponentRef.current?.getBoundingClientRect();
-      if (rect) setDomRect(rect);
-    }
-  }, [authorableState, wrapperComponentRef]);
+    useEffect(() => {
+        if (wrapperComponentRef?.current) {
+            const rect = wrapperComponentRef.current?.getBoundingClientRect();
+            if (rect) setDomRect(rect);
+        }
+    }, [selectedAuthorableKey, wrapperComponentRef]);
 
-  const resizeObserver = useRef<ResizeObserver>();
-  const mutationObserver = useRef<MutationObserver>();
+    useEffect(() => {
+        if (wrapperComponentRef?.current) {
+            const rect = wrapperComponentRef.current?.getBoundingClientRect();
+            if (rect) setDomRect(rect);
+        }
+    }, [authorableState, wrapperComponentRef]);
 
-  useEffect(() => {
-    if (wrapperComponentRef?.current) {
-      resizeObserver.current = new ResizeObserver(() => {
-        const rect = wrapperComponentRef.current?.getBoundingClientRect();
-        if (rect) setDomRect(rect);
-      });
+    const resizeObserver = useRef<ResizeObserver>();
+    const mutationObserver = useRef<MutationObserver>();
 
-      resizeObserver.current.observe(wrapperComponentRef.current);
+    useEffect(() => {
+        if (wrapperComponentRef?.current) {
+            resizeObserver.current = new ResizeObserver(() => {
+                const rect = wrapperComponentRef.current?.getBoundingClientRect();
+                if (rect) setDomRect(rect);
+            });
 
-      mutationObserver.current = new MutationObserver(() => {
-        const rect = wrapperComponentRef.current?.getBoundingClientRect();
-        if (rect) setDomRect(rect);
-      });
+            resizeObserver.current.observe(wrapperComponentRef.current);
 
-      mutationObserver.current.observe(wrapperComponentRef.current, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
-    }
-  }, [wrapperComponentRef]);
+            mutationObserver.current = new MutationObserver(() => {
+                const rect = wrapperComponentRef.current?.getBoundingClientRect();
+                if (rect) setDomRect(rect);
+            });
 
-  return (
-    <Styled
-      selected={selected}
-      style={{
-        width: `${domRect.width}px`,
-        height: `${domRect.height}px`,
-        top: `${domRect.top}px`,
-        left: `${domRect.left}px`,
-      }}
-      onClick={onClick}
-    >
-      <div>{componentName}</div>
-    </Styled>
-  );
+            mutationObserver.current.observe(wrapperComponentRef.current, {
+                attributes: true,
+                attributeFilter: ['class'],
+            });
+        }
+    }, [wrapperComponentRef]);
+
+    return (
+        <Styled
+            selected={selected}
+            style={{
+                width: `${domRect.width}px`,
+                height: `${domRect.height}px`,
+                top: `${domRect.top}px`,
+                left: `${domRect.left}px`,
+            }}
+            onClick={onClick}
+        >
+            <div>{componentName}</div>
+        </Styled>
+    );
 };
 
 export { Highlighter };

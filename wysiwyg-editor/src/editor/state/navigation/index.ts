@@ -1,68 +1,18 @@
-import AccountIcon from '@mui/icons-material/AccountCircleOutlined';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import DevicesIcon from '@mui/icons-material/Devices';
-import ExtensionIcon from '@mui/icons-material/Extension';
-import FunctionsIcon from '@mui/icons-material/Functions';
-import GroupsIcon from '@mui/icons-material/Groups';
-import SchemaIcon from '@mui/icons-material/Schema';
-import SettingsIcon from '@mui/icons-material/Settings';
 import { create } from 'zustand';
 
 import type { INavigationState } from '@/editor/state/navigation/typings';
 
-import { Segments } from '@/editor/navigation/enum';
+import { paths } from '@/editor/navigation/paths';
+import { primaryCommandsLinks } from '@/editor/state/navigation/data/primary-commands-links';
+import { secondaryCommandsLinks } from '@/editor/state/navigation/data/secondary-commands-links';
 
-const useNavigationStore = create<INavigationState>(() => ({
-    primaryCommandsLinks: [
-        {
-            label: 'Dashboard',
-            to: '/',
-            Icon: DashboardIcon,
-        },
-        {
-            label: 'Projects',
-            to: `/${Segments.PROJECTS}`,
-            Icon: AccountTreeIcon,
-        },
-        {
-            label: 'Schemas',
-            to: `/${Segments.SCHEMAS}`,
-            Icon: SchemaIcon,
-        },
-        {
-            label: 'Components',
-            to: `/${Segments.COMPONENTS}`,
-            Icon: ExtensionIcon,
-        },
-        {
-            label: 'Methods',
-            to: `/${Segments.METHODS}`,
-            Icon: FunctionsIcon,
-        },
-    ],
-    secondaryCommandsLinks: [
-        {
-            label: 'Account',
-            to: `/${Segments.ACCOUNT}/:accountId`,
-            Icon: AccountIcon,
-        },
-        {
-            label: 'Team',
-            to: `/${Segments.TEAM}`,
-            Icon: GroupsIcon,
-        },
-        {
-            label: 'Devices',
-            to: `/${Segments.DEVICES}`,
-            Icon: DevicesIcon,
-        },
-        {
-            label: 'Settings',
-            to: `/${Segments.SETTINGS}`,
-            Icon: SettingsIcon,
-        },
-    ],
+const useNavigationStore = create<INavigationState>((set) => ({
+    primaryCommandsLinks,
+    secondaryCommandsLinks,
+    pageTitle: '',
+    selectedPath: null,
+    setPageTitle: (pageTitle: string) => set((state) => ({ ...state, pageTitle })),
+    setSelectedPath: (selectedPath: keyof typeof paths | null) => set((state) => ({ ...state, selectedPath })),
 }));
 
 export { useNavigationStore };

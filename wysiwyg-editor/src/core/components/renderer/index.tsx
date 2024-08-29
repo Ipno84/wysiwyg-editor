@@ -1,58 +1,45 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 
-import type { RendererProps } from "@/core/components/renderer/typings";
-import { useTreeStore } from "@/core/state/tree";
-import { getAvailableComponent } from "@/core/state/tree/selectors/get-available-component";
-import type { ITreeState } from "@/core/state/tree/typings";
+import type { RendererProps } from '@/core/components/renderer/typings';
+import type { ITreeState } from '@/core/state/tree/typings';
 
-const Renderer: React.FC<RendererProps> = ({
-  tree,
-  leaf,
-  parentPath = "",
-  treeName,
-}) => {
-  console.log("rendering");
-  const Component = useTreeStore((state: ITreeState) =>
-    getAvailableComponent(state, typeof leaf === "string" ? "" : leaf?.name),
-  );
+import { useTreeStore } from '@/core/state/tree';
+import { getAvailableComponent } from '@/core/state/tree/selectors/get-available-component';
 
-  const leafPath = useMemo(() => {
-    return `${treeName ?? parentPath}`;
-  }, [parentPath, treeName]);
+const Renderer: React.FC<RendererProps> = ({ tree, leaf, parentPath = '', treeName }) => {
+    const Component = useTreeStore((state: ITreeState) => getAvailableComponent(state, typeof leaf === 'string' ? '' : leaf?.name));
 
-  if (tree) {
-    return (
-      <>
-        {tree.map((leaf, index) => {
-          const key = `${leafPath}.children[${index}]`;
+    const leafPath = useMemo(() => {
+        return `${treeName ?? parentPath}`;
+    }, [parentPath, treeName]);
 
-          return (
-            <Renderer
-              key={key}
-              leaf={leaf}
-              parentPath={`${leafPath}.children[${index}]`}
-            />
-          );
-        })}
-      </>
-    );
-  }
+    if (tree) {
+        return (
+            <>
+                {tree.map((leaf, index) => {
+                    const key = `${leafPath}.children[${index}]`;
 
-  if (leaf) {
-    if (typeof leaf === "string") return <>{leaf}</>;
+                    return <Renderer key={key} leaf={leaf} parentPath={`${leafPath}.children[${index}]`} />;
+                })}
+            </>
+        );
+    }
 
-    if (!Component) return null;
+    if (leaf) {
+        if (typeof leaf === 'string') return <>{leaf}</>;
 
-    if (!leaf.children) return <Component {...leaf.props} uuid={leaf.uuid} />;
+        if (!Component) return null;
 
-    return (
-      <Component {...leaf.props} uuid={leaf.uuid}>
-        <Renderer tree={leaf.children} parentPath={leafPath} />
-      </Component>
-    );
-  }
+        if (!leaf.children) return <Component {...leaf.props} uuid={leaf.uuid} />;
 
-  return null;
+        return (
+            <Component {...leaf.props} uuid={leaf.uuid}>
+                <Renderer tree={leaf.children} parentPath={leafPath} />
+            </Component>
+        );
+    }
+
+    return null;
 };
 
 export { Renderer };

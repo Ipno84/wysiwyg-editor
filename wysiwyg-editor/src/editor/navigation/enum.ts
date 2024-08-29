@@ -10,7 +10,9 @@ enum Segments {
     SCHEMAS = 'schemas',
     COMPONENTS = 'components',
     METHODS = 'methods',
-    TEAM = 'team',
+    TEAMS = 'teams',
+    AB_TESTS = 'ab-tests',
+    PERSONALIZATIONS = 'personalizations',
 }
 
 export { Segments };
