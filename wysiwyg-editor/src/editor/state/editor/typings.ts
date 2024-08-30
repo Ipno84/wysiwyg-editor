@@ -62,6 +62,7 @@ interface IEditorState {
     highlighterVisible: boolean;
     selectedAuthorableKey: string;
     selectedAuthorableComponentName: string;
+    selectedLeafPath: string;
     optionsWidgetAsDialog: boolean;
     devices: Device[];
     selectedDeviceId: string | null;
@@ -77,6 +78,7 @@ interface IEditorState {
     setAuthorableProps: (key: string, authorableProps?: AuthorableProps) => void;
     setSelectedAuthorableKey: (selectedAuthorableKey: string, selectedAuthorableComponentName?: string) => void;
     setAuthorableState: (authorablePropKey: string, authorablePropValue: any) => void;
+    setSelectedLeafPath: (selectedLeafPath: string) => void;
     setSelectedAuthorableStateFilter: (stateFilterValue: string) => void;
     setSelectedDeviceId: (selectedDeviceId: string | null) => void;
     toggleLandscapeOrientation: () => void;

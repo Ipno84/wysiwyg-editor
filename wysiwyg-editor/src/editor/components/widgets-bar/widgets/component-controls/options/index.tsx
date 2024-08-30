@@ -1,5 +1,4 @@
 import List from '@mui/material/List/List';
-import ListItem from '@mui/material/ListItem/ListItem';
 import React, { useCallback } from 'react';
 
 import { Option } from '@/editor/components/widgets-bar/widgets/component-controls/option';
@@ -25,15 +24,13 @@ const OptionsList: React.FC = () => {
             {Object.keys(filteredSelectedAuthorableProps).map((selectedAuthorablePropKey, index) => {
                 const selectedAuthorableProp = filteredSelectedAuthorableProps[selectedAuthorablePropKey];
                 return (
-                    <ListItem key={`${selectedAuthorablePropKey}-${index}`} divider sx={{ paddingTop: 2 }}>
-                        <Option
-                            key={`${selectedAuthorablePropKey}-${index}`}
-                            authorableProp={selectedAuthorableProp}
-                            authorablePropKey={selectedAuthorablePropKey}
-                            index={index}
-                            onOptionChange={onOptionChange}
-                        />
-                    </ListItem>
+                    <Option
+                        key={`${selectedAuthorablePropKey}-${index}`}
+                        authorableProp={selectedAuthorableProp}
+                        authorablePropKey={selectedAuthorablePropKey}
+                        index={index}
+                        onOptionChange={onOptionChange}
+                    />
                 );
             })}
         </List>

@@ -24,6 +24,7 @@ const useEditorStore = create<IEditorState, [['zustand/devtools', never]]>(
         highlighterVisible: true,
         optionsWidgetAsDialog: false,
         selectedAuthorableKey: '',
+        selectedLeafPath: '',
         selectedAuthorableComponentName: '',
         devices,
         selectedDeviceId: null,
@@ -69,6 +70,9 @@ const useEditorStore = create<IEditorState, [['zustand/devtools', never]]>(
                     },
                 };
             });
+        },
+        setSelectedLeafPath: (selectedLeafPath: string) => {
+            set((state) => ({ ...state, selectedLeafPath }));
         },
         setSelectedAuthorableStateFilter: (stateFilterValue: string) => {
             set((state) => {

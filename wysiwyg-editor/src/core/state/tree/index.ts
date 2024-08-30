@@ -22,9 +22,9 @@ const useTreeStore = create<ITreeState, [['zustand/devtools', never]]>(
                 },
             }));
         },
-        updateLeaf: (treeName, leafPath, leaf) => {
+        updateLeaf: (leafPath, leaf) => {
             // TODO: update single leaf or whole tree when user clicks save
-            console.log(treeName, leafPath, leaf);
+            console.log(leafPath, leaf);
         },
         setOrUpdateAvailableComponents: (availableComponents: Record<string, React.FC>) => {
             set((state) => ({

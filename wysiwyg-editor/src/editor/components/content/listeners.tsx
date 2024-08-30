@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Highlighter } from '@/editor/components/highlighter/styled';
 import { useEditorStore } from '@/editor/state/editor';
 import { setSelectedAuthorableKey as setSelectedAuthorableKeyAction } from '@/editor/state/editor/actions/set-selected-authorable-key';
+import { setSelectedLeafPath as setSelectedLeafPathAction } from '@/editor/state/editor/actions/set-selected-leaf-path';
 import { getSelectedAuthorableKey } from '@/editor/state/editor/selectors/authorables/get-selected-authorable-key';
 import { isHighlighterVisible as isHighlighterVisibleSelector } from '@/editor/state/editor/selectors/authorables/is-hightlighter-visible';
 
@@ -16,16 +17,19 @@ const Listeners: React.FC<{ iframeDocument: Document | undefined }> = ({ iframeD
 
     const setSelectedAuthorableKey = useEditorStore(setSelectedAuthorableKeyAction);
     const selectedAuthorableKey = useEditorStore(getSelectedAuthorableKey);
+    const setSelectedLeafPath = useEditorStore(setSelectedLeafPathAction);
 
     useEffect(() => {
         const selectedAuthorableElement = iframeDocument?.querySelector<HTMLElement>(`[data-uuid="${selectedAuthorableKey}"]`);
 
         if (selectedAuthorableElement !== selectedElement && selectedAuthorableElement) {
             setSelectedElement(selectedAuthorableElement);
+            if (selectedAuthorableElement.dataset.leafPath) setSelectedLeafPath(selectedAuthorableElement.dataset.leafPath);
         } else if (!selectedAuthorableElement) {
             setSelectedElement(null);
+            setSelectedLeafPath('');
         }
-    }, [iframeDocument, selectedAuthorableKey, selectedElement]);
+    }, [iframeDocument, selectedAuthorableKey, selectedElement, setSelectedLeafPath]);
 
     const onElementClick = useCallback<React.MouseEventHandler>(
         (e) => {
@@ -34,8 +38,8 @@ const Listeners: React.FC<{ iframeDocument: Document | undefined }> = ({ iframeD
 
             setSelectedElement(parentWithAttribute);
 
-            if (parentWithAttribute?.dataset.uuid) {
-                setSelectedAuthorableKey(parentWithAttribute.dataset.uuid);
+            if (parentWithAttribute?.dataset.uuid && parentWithAttribute.dataset.componentName) {
+                setSelectedAuthorableKey(parentWithAttribute.dataset.uuid, parentWithAttribute.dataset.componentName);
             }
 
             return;

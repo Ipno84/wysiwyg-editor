@@ -42,14 +42,28 @@ const Renderer: React.FC<RendererProps> = ({ tree, leaf, parentPath = '', treeNa
 
         if (!leaf.children)
             return (
-                <Component {...leaf.props} uuid={leaf.uuid} data-authorable={dataIsAuthorable} data-uuid={dataUuid} data-component-name={dataComponentName} />
+                <Component
+                    {...leaf.props}
+                    uuid={leaf.uuid}
+                    data-authorable={dataIsAuthorable}
+                    data-uuid={dataUuid}
+                    data-component-name={dataComponentName}
+                    data-leaf-path={leafPath}
+                />
             );
 
         // TODO: use leafPath and json traverse method to save new component state in the tree
         // console.log(leaf.name, leafPath);
 
         return (
-            <Component {...leaf.props} uuid={leaf.uuid} data-authorable={dataIsAuthorable} data-uuid={dataUuid} data-component-name={dataComponentName}>
+            <Component
+                {...leaf.props}
+                uuid={leaf.uuid}
+                data-authorable={dataIsAuthorable}
+                data-uuid={dataUuid}
+                data-component-name={dataComponentName}
+                data-leaf-path={leafPath}
+            >
                 <Renderer tree={leaf.children} parentPath={leafPath} {...leaf.props} />
             </Component>
         );

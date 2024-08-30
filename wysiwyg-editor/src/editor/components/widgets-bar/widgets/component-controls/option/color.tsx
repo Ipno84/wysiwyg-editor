@@ -1,13 +1,12 @@
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import { Typography } from '@mui/material';
+import Box from '@mui/material/Box/Box';
+import ListItem from '@mui/material/ListItem/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
 import React, { useCallback, useMemo } from 'react';
 
 import type { OptionProps } from '@/editor/components/widgets-bar/widgets/component-controls/option/typings';
 
-import { FlexContainer } from '@/components/ui/flex-container';
-import { FlexItem } from '@/components/ui/flex-item';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 const InputColor: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value }) => {
     const onChange = useCallback(
@@ -26,25 +25,29 @@ const InputColor: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, 
     }, [value, authorableProp.default]);
 
     return (
-        <FormControl fullWidth size="small">
-            <FlexContainer>
-                <FlexItem $flex={1}>
-                    <Label $for={`${authorablePropKey}-${index}`}>{authorableProp.label}</Label>
-                </FlexItem>
-                <FlexItem $width={80}>{currentValue}</FlexItem>
-                <FlexItem $width={27}>
-                    <Input
-                        $id={`${authorablePropKey}-${index}`}
-                        $type="color"
-                        $defaultValue={authorableProp.default}
-                        $value={currentValue}
-                        $onChange={onChange}
-                        $required={authorableProp.required}
-                    />
-                </FlexItem>
-            </FlexContainer>
-            {authorableProp.description ? <FormHelperText>{authorableProp.description}</FormHelperText> : null}
-        </FormControl>
+        <ListItem
+            divider
+            sx={{ paddingTop: 2 }}
+            secondaryAction={
+                <Box width={100} sx={{ display: 'flex' }}>
+                    <Box flex={1} sx={{ paddingRight: 1 }}>
+                        <Typography>{currentValue}</Typography>
+                    </Box>
+                    <Box width={30}>
+                        <Input
+                            $id={`${authorablePropKey}-${index}`}
+                            $type="color"
+                            $defaultValue={authorableProp.default}
+                            $value={currentValue}
+                            $onChange={onChange}
+                            $required={authorableProp.required}
+                        />
+                    </Box>
+                </Box>
+            }
+        >
+            <ListItemText primary={authorableProp.label} primaryTypographyProps={{ fontWeight: 700 }} secondary={authorableProp.description} />
+        </ListItem>
     );
 };
 

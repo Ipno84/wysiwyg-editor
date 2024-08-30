@@ -1,13 +1,9 @@
 import Checkbox from '@mui/material/Checkbox/Checkbox';
-import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
-import FormLabel from '@mui/material/FormLabel/FormLabel';
+import ListItem from '@mui/material/ListItem/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
 import React, { useCallback, useMemo } from 'react';
 
 import type { OptionProps } from '@/editor/components/widgets-bar/widgets/component-controls/option/typings';
-
-import { FlexContainer } from '@/components/ui/flex-container';
-import { FlexItem } from '@/components/ui/flex-item';
 
 const InputCheckbox: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value }) => {
     const onChange = useCallback(
@@ -23,17 +19,13 @@ const InputCheckbox: React.FC<OptionProps> = ({ authorableProp, authorablePropKe
     }, [value, authorableProp.default]);
 
     return (
-        <FormControl fullWidth size="small">
-            <FlexContainer>
-                <FlexItem $flex={1} $isFlex $centerVertically>
-                    <FormLabel htmlFor={`${authorablePropKey}-${index}`}>{authorableProp.label}</FormLabel>
-                </FlexItem>
-                <FlexItem>
-                    <Checkbox id={`${authorablePropKey}-${index}`} required={authorableProp.required} checked={currentValue} onChange={onChange} />
-                </FlexItem>
-            </FlexContainer>
-            {authorableProp.description ? <FormHelperText>{authorableProp.description}</FormHelperText> : null}
-        </FormControl>
+        <ListItem
+            divider
+            sx={{ paddingTop: 2 }}
+            secondaryAction={<Checkbox id={`${authorablePropKey}-${index}`} required={authorableProp.required} checked={currentValue} onChange={onChange} />}
+        >
+            <ListItemText primary={authorableProp.label} primaryTypographyProps={{ fontWeight: 700 }} secondary={authorableProp.description} />
+        </ListItem>
     );
 };
 

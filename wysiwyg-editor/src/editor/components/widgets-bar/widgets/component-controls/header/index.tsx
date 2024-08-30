@@ -22,7 +22,7 @@ const ComponentControlsWidgetHeader: React.FC = () => {
                 subheader="Changing the following options will update the component look and feel. Filter the options using the dropdown below."
                 action={<IconButton onClick={toogleOptionsWidgetAsDialog}>{isOptionsWidgetAsDialog ? <OpenInNewOffIcon /> : <OpenInNewIcon />}</IconButton>}
             />
-            <CardHeader subheader="Filter by" action={<OptionsFilter />} />
+            <CardHeader subheader="Filter by" subheaderTypographyProps={{ fontWeight: 700 }} action={<OptionsFilter />} />
             <Divider />
         </>
     );

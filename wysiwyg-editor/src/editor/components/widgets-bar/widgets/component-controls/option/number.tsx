@@ -1,5 +1,6 @@
 import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import ListItem from '@mui/material/ListItem/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
 import TextField from '@mui/material/TextField/TextField';
 import React, { useCallback, useMemo } from 'react';
 
@@ -22,21 +23,22 @@ const InputNumber: React.FC<OptionProps> = ({ authorableProp, authorablePropKey,
     }, [value, authorableProp.default]);
 
     return (
-        <FormControl fullWidth size="small">
-            <TextField
-                id={`${authorablePropKey}-${index}`}
-                variant="outlined"
-                size="small"
-                label={authorableProp.label}
-                value={currentValue}
-                required={authorableProp.required}
-                aria-required={authorableProp.required}
-                type="number"
-                onChange={onChange}
-                fullWidth
-            />
-            {authorableProp.description ? <FormHelperText>{authorableProp.description}</FormHelperText> : null}
-        </FormControl>
+        <ListItem divider sx={{ paddingBottom: 2 }}>
+            <FormControl fullWidth size="small">
+                <ListItemText primary={authorableProp.label} primaryTypographyProps={{ fontWeight: 700 }} secondary={authorableProp.description} />
+                <TextField
+                    id={`${authorablePropKey}-${index}`}
+                    variant="outlined"
+                    size="small"
+                    value={currentValue}
+                    required={authorableProp.required}
+                    aria-required={authorableProp.required}
+                    type="number"
+                    onChange={onChange}
+                    fullWidth
+                />
+            </FormControl>
+        </ListItem>
     );
 };
 

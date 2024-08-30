@@ -1,6 +1,7 @@
 import FormControl from '@mui/material/FormControl/FormControl';
-import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
 import InputLabel from '@mui/material/InputLabel/InputLabel';
+import ListItem from '@mui/material/ListItem/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
 import MenuItem from '@mui/material/MenuItem/MenuItem';
 import Select, { SelectChangeEvent } from '@mui/material/Select/Select';
 import React, { useCallback, useMemo } from 'react';
@@ -24,25 +25,32 @@ const InputSelectable: React.FC<OptionProps> = ({ authorableProp, authorableProp
     }, [value, authorableProp.default]);
 
     return (
-        <FormControl fullWidth size="small">
-            <InputLabel id={`${authorablePropKey}-${index}-label`}>{authorableProp.label}</InputLabel>
-            <Select
-                labelId={`${authorablePropKey}-${index}-label`}
-                id={`${authorablePropKey}-${index}`}
-                value={currentValue}
-                label={authorableProp.label}
-                onChange={onChange}
-            >
-                {authorableProp.options?.map((option: any) => {
-                    return (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    );
-                }) ?? null}
-            </Select>
-            {authorableProp.description ? <FormHelperText>{authorableProp.description}</FormHelperText> : null}
-        </FormControl>
+        <ListItem divider sx={{ paddingBottom: 2, flexDirection: 'column' }}>
+            <ListItemText
+                primary={authorableProp.label}
+                primaryTypographyProps={{ fontWeight: 700 }}
+                secondary={authorableProp.description}
+                sx={{ width: '100%' }}
+            />
+            <FormControl fullWidth size="small">
+                <InputLabel id={`${authorablePropKey}-${index}-label`}>{authorableProp.label}</InputLabel>
+                <Select
+                    labelId={`${authorablePropKey}-${index}-label`}
+                    id={`${authorablePropKey}-${index}`}
+                    value={currentValue}
+                    label={authorableProp.label}
+                    onChange={onChange}
+                >
+                    {authorableProp.options?.map((option: any) => {
+                        return (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        );
+                    }) ?? null}
+                </Select>
+            </FormControl>
+        </ListItem>
     );
 };
 

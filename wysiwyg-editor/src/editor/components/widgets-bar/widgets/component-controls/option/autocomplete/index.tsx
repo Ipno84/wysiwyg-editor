@@ -1,6 +1,8 @@
 import Autocomplete from '@mui/material/Autocomplete/Autocomplete';
 import FormControl from '@mui/material/FormControl/FormControl';
 import FormHelperText from '@mui/material/FormHelperText/FormHelperText';
+import ListItem from '@mui/material/ListItem/ListItem';
+import ListItemText from '@mui/material/ListItemText/ListItemText';
 import React, { useCallback, useMemo } from 'react';
 
 import type { AutocompleteValue } from '@mui/material/Autocomplete/Autocomplete';
@@ -41,23 +43,25 @@ const InputAutocomplete: React.FC<OptionProps> = ({ authorableProp, authorablePr
     }, [value, authorableProp.default, options]);
 
     return (
-        <FormControl fullWidth size="small">
-            <Autocomplete
-                size="small"
-                id={`${authorablePropKey}-${index}`}
-                autoHighlight={true}
-                options={options}
-                getOptionLabel={(option) => option.label ?? ''}
-                onChange={onChange}
-                disableListWrap={true}
-                PopperComponent={Popper}
-                ListboxComponent={ListboxComponent}
-                defaultValue={currentValue}
-                renderInput={renderInput}
-                renderGroup={renderGroup}
-            />
-            {authorableProp.description ? <FormHelperText>{authorableProp.description}</FormHelperText> : null}
-        </FormControl>
+        <ListItem divider sx={{ paddingBottom: 2 }}>
+            <FormControl fullWidth size="small">
+                <ListItemText primary={authorableProp.label} primaryTypographyProps={{ fontWeight: 700 }} secondary={authorableProp.description} />
+                <Autocomplete
+                    size="small"
+                    id={`${authorablePropKey}-${index}`}
+                    autoHighlight={true}
+                    options={options}
+                    getOptionLabel={(option) => option.label ?? ''}
+                    onChange={onChange}
+                    disableListWrap={true}
+                    PopperComponent={Popper}
+                    ListboxComponent={ListboxComponent}
+                    defaultValue={currentValue}
+                    renderInput={renderInput}
+                    renderGroup={renderGroup}
+                />
+            </FormControl>
+        </ListItem>
     );
 };
 
