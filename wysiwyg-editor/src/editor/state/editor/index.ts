@@ -21,6 +21,7 @@ const useEditorStore = create<IEditorState, [['zustand/devtools', never]]>(
         commandsBarOpen: false,
         treeBarVisible: true,
         widgetsBarVisible: true,
+        highlighterVisible: true,
         optionsWidgetAsDialog: false,
         selectedAuthorableKey: '',
         selectedAuthorableComponentName: '',
@@ -108,6 +109,9 @@ const useEditorStore = create<IEditorState, [['zustand/devtools', never]]>(
         },
         toogleOptionsWidgetAsDialog: () => {
             set((state) => ({ ...state, optionsWidgetAsDialog: !state.optionsWidgetAsDialog }));
+        },
+        setHighlighterVisible: (highlighterVisible: boolean) => {
+            set({ highlighterVisible });
         },
         removeDevices: (deviceIds: string[]) => {
             set((state) => ({

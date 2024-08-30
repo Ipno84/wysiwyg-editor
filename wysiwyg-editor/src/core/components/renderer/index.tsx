@@ -9,6 +9,18 @@ import { getAvailableComponent } from '@/core/state/tree/selectors/get-available
 const Renderer: React.FC<RendererProps> = ({ tree, leaf, parentPath = '', treeName }) => {
     const Component = useTreeStore((state: ITreeState) => getAvailableComponent(state, typeof leaf === 'string' ? '' : leaf?.name));
 
+    const dataIsAuthorable = useMemo(() => (typeof Component === 'function' ? true : undefined), [Component]);
+
+    const dataUuid = useMemo(() => {
+        if (!dataIsAuthorable || typeof leaf === 'string') return undefined;
+        return leaf?.uuid;
+    }, [dataIsAuthorable, leaf]);
+
+    const dataComponentName = useMemo(() => {
+        if (!dataIsAuthorable || typeof leaf === 'string') return undefined;
+        return leaf?.name;
+    }, [dataIsAuthorable, leaf]);
+
     const leafPath = useMemo(() => `${treeName ?? parentPath}`, [parentPath, treeName]);
 
     if (tree) {
@@ -28,13 +40,17 @@ const Renderer: React.FC<RendererProps> = ({ tree, leaf, parentPath = '', treeNa
 
         if (!Component) return null;
 
-        if (!leaf.children) return <Component {...leaf.props} uuid={leaf.uuid} />;
+        if (!leaf.children)
+            return (
+                <Component {...leaf.props} uuid={leaf.uuid} data-authorable={dataIsAuthorable} data-uuid={dataUuid} data-component-name={dataComponentName} />
+            );
 
-        console.log(leaf.name, leafPath);
+        // TODO: use leafPath and json traverse method to save new component state in the tree
+        // console.log(leaf.name, leafPath);
 
         return (
-            <Component {...leaf.props} uuid={leaf.uuid}>
-                <Renderer tree={leaf.children} parentPath={leafPath} />
+            <Component {...leaf.props} uuid={leaf.uuid} data-authorable={dataIsAuthorable} data-uuid={dataUuid} data-component-name={dataComponentName}>
+                <Renderer tree={leaf.children} parentPath={leafPath} {...leaf.props} />
             </Component>
         );
     }

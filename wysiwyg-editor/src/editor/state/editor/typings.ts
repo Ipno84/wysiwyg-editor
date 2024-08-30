@@ -59,6 +59,7 @@ interface IEditorState {
     commandsBarOpen: boolean;
     treeBarVisible: boolean;
     widgetsBarVisible: boolean;
+    highlighterVisible: boolean;
     selectedAuthorableKey: string;
     selectedAuthorableComponentName: string;
     optionsWidgetAsDialog: boolean;
@@ -84,6 +85,7 @@ interface IEditorState {
     setWidgetsBarVisibility: (widgetsBarVisible: boolean) => void;
     setOptionsWidgetAsDialog: (optionsWidgetAsDialog: boolean) => void;
     toogleOptionsWidgetAsDialog: () => void;
+    setHighlighterVisible: (highlighterVisible: boolean) => void;
     removeDevices: (deviceIds: string[]) => void;
     removeProjects: (projectIds: string[]) => void;
     removeSchemas: (schemaIds: string[]) => void;

@@ -196,7 +196,7 @@ const defaultTree: Tree = [
                     },
                     {
                         uuid: '469edd8e-d98b-49e5-8890-0c8cf857f619',
-                        name: 'TypographyComponent',
+                        name: 'Typography',
                         children: ['16'],
                     },
                 ],

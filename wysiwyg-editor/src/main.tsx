@@ -8,6 +8,15 @@ import { createRoot } from 'react-dom/client';
 
 import { App } from '@/App';
 
+// if (process.env.NODE_ENV === 'development') {
+//     import('react-devtools-core').then(({ connectToDevTools }) => {
+//         connectToDevTools({
+//             host: 'localhost',
+//             port: 8097, // Porta predefinita di React DevTools standalone
+//         });
+//     });
+// }
+
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <CssBaseline />

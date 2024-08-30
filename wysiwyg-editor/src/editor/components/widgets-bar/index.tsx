@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ComponentControlsWidget } from '@/editor/components/widgets-bar/widgets/component-controls';
+import { EditorControlsWidget } from '@/editor/components/widgets-bar/widgets/editor-controls';
 import { InfoWidget } from '@/editor/components/widgets-bar/widgets/info';
 import { useEditorStore } from '@/editor/state/editor';
 import { getFilteredSelectedAuthorableProps } from '@/editor/state/editor/selectors/authorables/get-filtered-selected-authorable-props';
@@ -16,6 +17,7 @@ const WidgetsBar: React.FC = () => {
     return (
         <>
             <InfoWidget />
+            <EditorControlsWidget />
             <ComponentControlsWidget />
         </>
     );
