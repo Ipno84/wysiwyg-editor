@@ -1,15 +1,16 @@
-import Card from '@mui/material/Card/Card';
 import React from 'react';
 
+import { WidgetWrapper } from '@/editor/components/widgets-bar/widget/wrapper';
 import { InfoWidgetContent } from '@/editor/components/widgets-bar/widgets/info/content';
 import { InfoWidgetHeader } from '@/editor/components/widgets-bar/widgets/info/header';
+import { WidgetNames } from '@/editor/state/editor/enums';
 
 const InfoWidget: React.FC = () => {
     return (
-        <Card>
+        <WidgetWrapper widgetName={WidgetNames.INFO}>
             <InfoWidgetHeader />
             <InfoWidgetContent />
-        </Card>
+        </WidgetWrapper>
     );
 };
 

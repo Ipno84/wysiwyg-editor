@@ -1,4 +1,5 @@
 import type { AuthorableProps } from 'react';
+import type { WidgetNames } from '@/editor/state/editor/enums';
 
 interface Device {
     id: string;
@@ -63,9 +64,10 @@ interface IEditorState {
     selectedAuthorableKey: string;
     selectedAuthorableComponentName: string;
     selectedLeafPath: string;
-    optionsWidgetAsDialog: boolean;
+    widgetAsDialog: WidgetNames | null;
     devices: Device[];
     selectedDeviceId: string | null;
+    selectedDeviceType: Device['type'] | null;
     landscapeOrientation: boolean;
     projects: Project[];
     schemas: Schema[];
@@ -81,12 +83,12 @@ interface IEditorState {
     setSelectedLeafPath: (selectedLeafPath: string) => void;
     setSelectedAuthorableStateFilter: (stateFilterValue: string) => void;
     setSelectedDeviceId: (selectedDeviceId: string | null) => void;
+    setSelectedDeviceType: (selectedDeviceType: Device['type'] | null) => void;
     toggleLandscapeOrientation: () => void;
     setCommandsBarOpening: (commandsBarOpen: boolean) => void;
     setTreeBarVisibility: (treeBarVisible: boolean) => void;
     setWidgetsBarVisibility: (widgetsBarVisible: boolean) => void;
-    setOptionsWidgetAsDialog: (optionsWidgetAsDialog: boolean) => void;
-    toogleOptionsWidgetAsDialog: () => void;
+    setWidgetAsDialog: (widgetAsDialog: WidgetNames | null) => void;
     setHighlighterVisible: (highlighterVisible: boolean) => void;
     removeDevices: (deviceIds: string[]) => void;
     removeProjects: (projectIds: string[]) => void;

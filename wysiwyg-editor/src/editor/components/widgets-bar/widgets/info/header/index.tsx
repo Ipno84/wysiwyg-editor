@@ -1,14 +1,10 @@
-import { Divider } from '@mui/material';
-import CardHeader from '@mui/material/CardHeader/CardHeader';
 import React from 'react';
 
-const InfoWidgetHeader: React.FC = () => {
-    return (
-        <>
-            <CardHeader title="Details" titleTypographyProps={{ fontWeight: 700 }} subheader="Informations about currently selected component" />
-            <Divider />
-        </>
-    );
-};
+import { WidgetHeader } from '@/editor/components/widgets-bar/widget/header';
+import { WidgetNames } from '@/editor/state/editor/enums';
+
+const InfoWidgetHeader: React.FC = () => (
+    <WidgetHeader title="Details" subheader="Informations about currently selected component" widgetName={WidgetNames.INFO} />
+);
 
 export { InfoWidgetHeader };

@@ -17,6 +17,7 @@ const HighlighterVisibility: React.FC = () => {
 
     return (
         <ListItem
+            divider
             secondaryAction={
                 <IconButton id={'show-hide-highlighter'} onClick={toogleHighlighterVisibility}>
                     {isHighlighterVisible ? <VisibilityIcon /> : <VisibilityOffIcon />}

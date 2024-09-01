@@ -4,7 +4,6 @@ import IconButton from '@mui/material/IconButton/IconButton';
 import Toolbar from '@mui/material/Toolbar/Toolbar';
 
 import { AppBar } from '@/editor/components/nav-bar/app-bar';
-import { EditorMenu } from '@/editor/components/nav-bar/menus/editor';
 import { NavBarTitle } from '@/editor/components/nav-bar/title';
 import { useEditorStore } from '@/editor/state/editor';
 import { toggleCommandsBarOpening as toggleCommandsBarOpeningAction } from '@/editor/state/editor/actions/toggle-commands-bar-opening';
@@ -29,7 +28,6 @@ const NavBar: React.FC = () => {
                     {isCommandBarOpen ? <ChevronLeft /> : <MenuIcon />}
                 </IconButton>
                 <NavBarTitle />
-                <EditorMenu />
             </Toolbar>
         </AppBar>
     );
