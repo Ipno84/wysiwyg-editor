@@ -8,6 +8,7 @@ interface BaseOptionProps {
 
 interface OptionProps extends BaseOptionProps {
     onOptionChange: (authorablePropKey: string, value: any) => void;
+    leafValue?: any;
     value?: any;
 }
 

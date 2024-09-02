@@ -112,9 +112,11 @@ const defaultTree: Tree = [
                 name: 'GridContainer',
                 props: {
                     $paddingTop: 20,
+                    $columns: 4,
                     $breakpoints: {
                         1280: {
                             $paddingTop: 40,
+                            $columns: 8,
                         },
                     },
                 },
@@ -197,7 +199,9 @@ const defaultTree: Tree = [
                     {
                         uuid: '469edd8e-d98b-49e5-8890-0c8cf857f619',
                         name: 'Typography',
-                        children: ['16'],
+                        props: {
+                            children: '16',
+                        },
                     },
                 ],
             },

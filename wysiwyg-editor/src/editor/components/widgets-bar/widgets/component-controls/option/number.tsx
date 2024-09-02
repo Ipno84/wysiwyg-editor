@@ -6,7 +6,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import type { OptionProps } from '@/editor/components/widgets-bar/widgets/component-controls/option/typings';
 
-const InputNumber: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value }) => {
+const InputNumber: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value, leafValue }) => {
     const onChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             onOptionChange(authorablePropKey, e.target.value);
@@ -15,12 +15,12 @@ const InputNumber: React.FC<OptionProps> = ({ authorableProp, authorablePropKey,
     );
 
     const currentValue = useMemo(() => {
-        const initialValue = value ?? authorableProp.default;
+        const initialValue = value ?? leafValue ?? authorableProp.default;
         if (initialValue === undefined) {
             return '';
         }
         return initialValue;
-    }, [value, authorableProp.default]);
+    }, [value, leafValue, authorableProp.default]);
 
     return (
         <ListItem divider sx={{ paddingBottom: 2 }}>

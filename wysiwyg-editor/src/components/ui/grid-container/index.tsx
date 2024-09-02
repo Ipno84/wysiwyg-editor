@@ -36,7 +36,7 @@ const GridContainerComponentBaseAuthorableProps: AuthorableProps = {
     ...ViewComponent.authorableProps,
     $columns: {
         type: 'number',
-        default: 6,
+        default: 8,
         required: false,
         label: 'Columns',
         description: 'Number of columns',

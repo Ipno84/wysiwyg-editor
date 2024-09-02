@@ -3,6 +3,9 @@ import React, { useMemo } from 'react';
 import type { OptionProps } from '@/editor/components/widgets-bar/widgets/component-controls/option/typings';
 import type { IEditorState } from '@/editor/state/editor/typings';
 
+import { useTreeStore } from '@/core/state/tree';
+import { getSelectedLeafPropFromPathByKey } from '@/core/state/tree/selectors/get-selected-leaf-prop-from-path-by-key';
+import { ITreeState } from '@/core/state/tree/typings';
 import { InputAutocomplete } from '@/editor/components/widgets-bar/widgets/component-controls/option/autocomplete';
 import { InputCheckbox } from '@/editor/components/widgets-bar/widgets/component-controls/option/checkbox';
 import { InputColor } from '@/editor/components/widgets-bar/widgets/component-controls/option/color';
@@ -11,8 +14,11 @@ import { InputSelectable } from '@/editor/components/widgets-bar/widgets/compone
 import { InputText } from '@/editor/components/widgets-bar/widgets/component-controls/option/text';
 import { useEditorStore } from '@/editor/state/editor';
 import { getSelectedAuthorableStateByKey } from '@/editor/state/editor/selectors/authorables/get-selected-authorable-state-by-key';
+import { getSelectedLeafPath } from '@/editor/state/editor/selectors/authorables/get-selected-leaf-path';
 
 const Option: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange }) => {
+    const selectedLeafPath = useEditorStore(getSelectedLeafPath);
+    const selectedLeafProp = useTreeStore((state: ITreeState) => getSelectedLeafPropFromPathByKey(state, selectedLeafPath, authorablePropKey));
     const selectedAuthorableStateByKey = useEditorStore((state: IEditorState) => getSelectedAuthorableStateByKey(state, authorablePropKey));
 
     const Component = useMemo(() => {
@@ -41,6 +47,7 @@ const Option: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, inde
             index={index}
             onOptionChange={onOptionChange}
             value={selectedAuthorableStateByKey}
+            leafValue={selectedLeafProp}
         />
     );
 };

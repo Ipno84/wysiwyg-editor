@@ -73,14 +73,14 @@ const ControlledSelect = <T,>({
                     <Select
                         labelId={`${id}-label`}
                         id={id}
-                        value={selectedOption}
+                        value={selectedOption ?? ''}
                         sx={selectedMenuItemSx}
                         onClick={handleOpen}
                         open={false}
                         displayEmpty
                         renderValue={renderSelectValue}
                     >
-                        <MenuItem key={''} value={''} onClick={onResetClick}>
+                        <MenuItem key={null} value={''} onClick={onResetClick}>
                             {ResetItemReactNode}
                         </MenuItem>
 
@@ -104,7 +104,7 @@ const ControlledSelect = <T,>({
                             style: { minWidth: anchorEl ? anchorEl.clientWidth : undefined },
                         }}
                     >
-                        <MenuItem key={''} value={''} onClick={onResetClick}>
+                        <MenuItem key={null} value={''} onClick={onResetClick}>
                             {ResetItemReactNode}
                         </MenuItem>
                         {options.map((option) => {

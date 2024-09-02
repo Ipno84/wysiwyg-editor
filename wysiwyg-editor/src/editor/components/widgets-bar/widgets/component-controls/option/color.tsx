@@ -8,7 +8,7 @@ import type { OptionProps } from '@/editor/components/widgets-bar/widgets/compon
 
 import { Input } from '@/components/ui/input';
 
-const InputColor: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value }) => {
+const InputColor: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value, leafValue }) => {
     const onChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             onOptionChange(authorablePropKey, e.target.value);
@@ -17,12 +17,12 @@ const InputColor: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, 
     );
 
     const currentValue = useMemo(() => {
-        const initialValue = value ?? authorableProp.default;
+        const initialValue = value ?? leafValue ?? authorableProp.default;
         if (initialValue === undefined) {
             return '';
         }
         return initialValue;
-    }, [value, authorableProp.default]);
+    }, [value, leafValue, authorableProp.default]);
 
     return (
         <ListItem

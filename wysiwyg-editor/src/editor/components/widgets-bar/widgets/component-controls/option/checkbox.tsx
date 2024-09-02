@@ -5,7 +5,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import type { OptionProps } from '@/editor/components/widgets-bar/widgets/component-controls/option/typings';
 
-const InputCheckbox: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value }) => {
+const InputCheckbox: React.FC<OptionProps> = ({ authorableProp, authorablePropKey, index, onOptionChange, value, leafValue }) => {
     const onChange = useCallback(
         (e: React.ChangeEvent<HTMLInputElement>) => {
             onOptionChange(authorablePropKey, e.target.checked);
@@ -14,9 +14,9 @@ const InputCheckbox: React.FC<OptionProps> = ({ authorableProp, authorablePropKe
     );
 
     const currentValue = useMemo(() => {
-        const initialValue = Boolean(value ?? authorableProp.default);
+        const initialValue = Boolean(value ?? leafValue ?? authorableProp.default);
         return initialValue;
-    }, [value, authorableProp.default]);
+    }, [value, leafValue, authorableProp.default]);
 
     return (
         <ListItem
